@@ -16,15 +16,27 @@ function GameForm() {
     console.log("Handle Change Called");
     // console.log(e.target.checked);
     let lang = e.target.value;
-    if (e.target.checked) {
-      console.log(e.target);
-      console.log(lang);
-    }
+    // if (e.target.checked) {
+    //   console.log(e.target);
+    //   console.log(lang);
+    // }
     defaultVal[lang] = !defaultVal[lang];
   };
 
   const handleSubmit = (e) => {
     let mapping = { English: "en-US", Hindi: "hi-IN" };
+    console.log("Handle Submit Called");
+
+    let language = "";
+    if (defaultVal["English"] && defaultVal["Hindi"]) {
+      language = "en-US%2Chi-IN";
+    } else if (!defaultVal["English"] && defaultVal["Hindi"]) {
+      language = "hi-IN";
+    } else {
+      language = "en-US";
+    }
+
+    console.log(language);
     let url =
       "https://api.themoviedb.org/3/discover/movie?include_video=false&language=en-US%2Chi-IN&page=1&sort_by=popularity.desc&with_origin_country=US%2CIN";
   };
