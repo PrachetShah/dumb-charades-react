@@ -1,39 +1,46 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import "./GameForm.css";
 
 function GameForm() {
-  const APICall = () => {
-    let url =
-      "https://api.themoviedb.org/3/discover/movie?include_video=false&language=en-US%2Chi-IN&page=1&sort_by=popularity.desc&with_origin_country=IN";
-  };
+  let defaultVal = { English: false, Hindi: false };
+
+  const [year, setYear] = useState(0);
 
   const type = "checkbox";
 
   return (
     <div className="d-flex align-items-center justify-content-center">
       <Form className="pt-5">
-        <Form.Group
-          style={{ display: "flex" }}
-          className="bg-body-tertiary p-4 fs-5"
-        >
-          <Form.Label htmlFor="disabledTextInput" style={{ width: "5rem" }}>
-            Enter Year:
-          </Form.Label>
-          <Form.Control id="disabledTextInput" placeholder="Optional" />
-        </Form.Group>
-        <Form.Group className="bg-body-tertiary mt-2 p-4 fs-5">
-          <Form.Label className="mt-3">Enter Language: </Form.Label>
+        <Row className="bg-body-tertiary p-4">
+          <Col>
+            <h5 className="pe-2">Enter Year:</h5>
+          </Col>
+          <Col>
+            <Form.Control placeholder="Optional" onChange={handleYear} />
+          </Col>
+        </Row>
+
+        <Row className="bg-body-tertiary mt-4 p-4 fs-5">
+          <h5 className="mt-3">Enter Language: </h5>
           {["English", "Hindi"].map((lang) => (
-            <div key={`default-${type}`} className="mb-3">
+            <div key={`default-${lang}`} className="mb-1 pt-2">
               <Form.Check // prettier-ignore
                 type={type}
-                id={`default-${type}`}
+                id={`default-${lang}`}
                 label={lang}
+                value={lang}
+                onChange={handleChange}
               />
             </div>
           ))}
-        </Form.Group>
-        <Button type="submit">Submit</Button>
+        </Row>
+
+        <Row>
+          <Button type="submit" className="mt-4">
+            Generate a Movie
+          </Button>
+        </Row>
       </Form>
     </div>
   );
