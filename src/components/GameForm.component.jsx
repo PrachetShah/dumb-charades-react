@@ -26,7 +26,7 @@ function GameForm() {
   const handleSubmit = (e) => {
     let mapping = { English: "en-US", Hindi: "hi-IN" };
     let url =
-      "https://api.themoviedb.org/3/discover/movie?include_video=false&language=en-US%2Chi-IN&page=1&sort_by=popularity.desc&with_origin_country=IN";
+      "https://api.themoviedb.org/3/discover/movie?include_video=false&language=en-US%2Chi-IN&page=1&sort_by=popularity.desc&with_origin_country=US%2CIN";
   };
 
   const type = "checkbox";
@@ -46,7 +46,7 @@ function GameForm() {
         <Row className="bg-body-tertiary mt-4 p-4 fs-5">
           <h5 className="mt-3">Enter Language: </h5>
           {["English", "Hindi"].map((lang) => (
-            <div key={`default-${lang}`} className="mb-1 pt-2">
+            <div key={`default-${lang}`} className="mb-1 pt-2" required>
               <Form.Check // prettier-ignore
                 type={type}
                 id={`default-${lang}`}
@@ -59,7 +59,7 @@ function GameForm() {
         </Row>
 
         <Row>
-          <Button type="submit" className="mt-4">
+          <Button type="submit" className="mt-4" onClick={handleSubmit}>
             Generate a Movie
           </Button>
         </Row>
