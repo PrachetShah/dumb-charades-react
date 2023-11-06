@@ -4,10 +4,10 @@ import GameForm from "./components/GameForm.component";
 
 function App() {
   return (
-    <>
+    <div className="">
       <NavbarComponent />
       <GameForm />
-    </>
+    </div>
   );
 }
 
