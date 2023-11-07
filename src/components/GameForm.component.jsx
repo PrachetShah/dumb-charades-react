@@ -86,7 +86,10 @@ function GameForm() {
   const type = "radio";
 
   return (
-    <div className="d-flex align-items-center justify-content-center">
+    <div
+      className="d-flex align-items-center justify-content-center mx-2"
+      style={{ height: "60vh" }}
+    >
       <Form className="pt-5">
         <Row className="bg-body-tertiary p-4">
           <Col>
