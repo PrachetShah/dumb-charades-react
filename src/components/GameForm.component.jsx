@@ -60,7 +60,7 @@ function GameForm() {
       url = url + `&year=${year}`;
     }
 
-    console.log(url);
+    // console.log(url);
 
     let num, movieNum;
     var headers = {
