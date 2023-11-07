@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "./GameForm.css";
 import axios from "axios";
-import Spinner from "react-bootstrap/Spinner";
+// import Spinner from "react-bootstrap/Spinner";
 
 function GameForm() {
-  // let defaultVal = { English: false, Hindi: false };
-
   const [year, setYear] = useState(0);
   const [movie, setMovie] = useState(null);
   const [radio, setRadio] = useState("English");
