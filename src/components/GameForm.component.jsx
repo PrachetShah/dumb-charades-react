@@ -30,7 +30,8 @@ function GameForm() {
     let mapping = { English: "en-US", Hindi: "hi-IN" };
     console.log("Handle Submit Called");
 
-    let language = "";
+    let language = "",
+      origin = "";
     if (defaultVal["English"] && defaultVal["Hindi"]) {
       language = "en-US%2Chi-IN";
       origin = "US%2CIN";
@@ -49,7 +50,7 @@ function GameForm() {
     console.log(page);
     console.log(language);
 
-    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=IN`;
+    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=${origin}`;
 
     let num, movieNum;
     var headers = {
