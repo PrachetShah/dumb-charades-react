@@ -33,10 +33,13 @@ function GameForm() {
     let language = "";
     if (defaultVal["English"] && defaultVal["Hindi"]) {
       language = "en-US%2Chi-IN";
+      origin = "US%2CIN";
     } else if (!defaultVal["English"] && defaultVal["Hindi"]) {
       language = "hi-IN";
+      origin = "IN";
     } else {
       language = "en-US";
+      origin = "US";
     }
 
     let page = 1 + Math.floor(Math.random() * 15);
@@ -46,7 +49,7 @@ function GameForm() {
     console.log(page);
     console.log(language);
 
-    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc`;
+    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=IN`;
 
     let num, movieNum;
     var headers = {
