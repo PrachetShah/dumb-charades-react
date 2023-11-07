@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "./GameForm.css";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 
 function GameForm() {
   // let defaultVal = { English: false, Hindi: false };
@@ -125,8 +126,8 @@ function GameForm() {
             Generate a Movie
           </Button>
         </Row>
-        <Row className="mt-3 pt-2 bg-body-tertiary text-center">
-          <Col>{movie ? <h2>{movie["title"]}</h2> : ""}</Col>
+        <Row className="mt-3 bg-body-tertiary text-center">
+          <Col>{movie ? <h2 className="pt-2">{movie["title"]}</h2> : ""}</Col>
         </Row>
       </Form>
     </div>
