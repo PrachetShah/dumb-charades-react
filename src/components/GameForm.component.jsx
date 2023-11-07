@@ -25,33 +25,6 @@ function GameForm() {
     defaultVal[lang] = !defaultVal[lang];
   };
 
-  const callApi = (url) => {
-    let num, movieNum;
-    var headers = {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTc2ZmQxODc2OTcwYTk1YjE0NWUxOGY4M2U4ZjIyMyIsInN1YiI6IjYxMjcwOWNhMTk0MTg2MDA4YzY4NTc0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PNA5PI8Xo_yfemAzq_uK4GPSAWe7m4vBIukZsmRoVbo",
-    };
-    axios
-      .get(url, { headers })
-      .then((res) => {
-        // console.log(res);
-        // console.log(res.data);
-        num = res.data["results"].length;
-        movieNum = 1 + Math.floor(Math.random() * num);
-        console.log("Movie Num: ", movieNum);
-
-        let result = res.data["results"][movieNum];
-        console.log(result);
-        return result;
-      })
-      .catch((error) => {
-        console.log(error);
-        return error;
-      });
-    return null;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let mapping = { English: "en-US", Hindi: "hi-IN" };
@@ -67,7 +40,7 @@ function GameForm() {
     }
 
     let page = 1 + Math.floor(Math.random() * 15);
-    if (page == 5) {
+    if (page === 5) {
       page = 4;
     }
     console.log(page);
