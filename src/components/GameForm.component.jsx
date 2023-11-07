@@ -4,53 +4,59 @@ import "./GameForm.css";
 import axios from "axios";
 
 function GameForm() {
-  let defaultVal = { English: false, Hindi: false };
+  // let defaultVal = { English: false, Hindi: false };
 
   const [year, setYear] = useState(0);
   const [movie, setMovie] = useState(null);
+  const [radio, setRadio] = useState("English");
 
   const handleYear = (e) => {
     setYear(e.target.value);
     console.log(year);
   };
 
-  const handleChange = (e) => {
+  const handleClick = (e) => {
     console.log("Handle Change Called");
-    // console.log(e.target.checked);
-    let lang = e.target.value;
-    // if (e.target.checked) {
-    //   console.log(e.target);
-    //   console.log(lang);
-    // }
-    defaultVal[lang] = !defaultVal[lang];
+    let power = e.target.value;
+    let lang = e.target.id;
+    // console.log(power, lang);
+    if (lang === "Hindi") {
+      setRadio("Hindi");
+    } else {
+      setRadio("English");
+    }
+    // defaultVal[lang] = !defaultVal[lang];
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     let mapping = { English: "en-US", Hindi: "hi-IN" };
     console.log("Handle Submit Called");
 
-    let language = "",
-      origin = "";
-    if (defaultVal["English"] && defaultVal["Hindi"]) {
-      language = "en-US%2Chi-IN";
-      origin = "US%2CIN";
-    } else if (!defaultVal["English"] && defaultVal["Hindi"]) {
-      language = "hi-IN";
-      origin = "IN";
-    } else {
-      language = "en-US";
+    // console.log(radio);
+
+    let language = "English",
       origin = "US";
+
+    if (radio === "English") {
+      language = mapping[radio];
+      origin = "US";
+    } else {
+      language = mapping[radio];
+      origin = "IN";
     }
 
     let page = 1 + Math.floor(Math.random() * 15);
-    if (page === 5) {
-      page = 4;
-    }
-    console.log(page);
-    console.log(language);
+    // console.log(page);
+    // console.log(language);
 
     let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=${origin}`;
+
+    if (year > 1890) {
+      console.log(year);
+      url = url + `&year=${year}`;
+    }
 
     let num, movieNum;
     var headers = {
@@ -62,13 +68,14 @@ function GameForm() {
       .get(url, { headers })
       .then((res) => {
         // console.log(res);
-        console.log(res.data);
+        // console.log(res.data);
         num = res.data["results"].length;
         movieNum = 1 + Math.floor(Math.random() * num - 1);
         console.log("Movie Num: ", movieNum);
 
         let result = res.data["results"][movieNum];
-        console.log(result);
+        // console.log(result);
+
         setMovie(result);
       })
       .catch((error) => {
@@ -76,9 +83,8 @@ function GameForm() {
       });
   };
 
-  useEffect(() => {}, [movie]);
-
-  const type = "checkbox";
+  // const type = "checkbox";
+  const type = "radio";
 
   return (
     <div className="d-flex align-items-center justify-content-center">
@@ -94,27 +100,35 @@ function GameForm() {
 
         <Row className="bg-body-tertiary mt-4 p-4 fs-5">
           <h5 className="mt-3">Enter Language: </h5>
-          {["English", "Hindi"].map((lang) => (
-            <div key={`default-${lang}`} className="mb-1 pt-2" required>
-              <Form.Check // prettier-ignore
-                type={type}
-                id={`default-${lang}`}
-                label={lang}
-                value={lang}
-                onChange={handleChange}
-              />
-            </div>
-          ))}
+          <div key={`inline-${type}`} className="mb-1 pt-2 menu">
+            <Form.Check
+              inline
+              label="English"
+              name="group1"
+              type={type}
+              id="English"
+              onClick={handleClick}
+            />
+            <Form.Check
+              inline
+              label="Hindi"
+              name="group1"
+              type={type}
+              id="Hindi"
+              onClick={handleClick}
+            />
+          </div>
         </Row>
 
         <Row>
-          <Button type="submit" className="mt-4" onClick={handleSubmit}>
+          <Button className="mt-4" onClick={handleSubmit}>
             Generate a Movie
           </Button>
         </Row>
+        <Row className="mt-3 pt-2 bg-body-tertiary">
+          <Col>{movie ? <h2>{movie["title"]}</h2> : ""}</Col>
+        </Row>
       </Form>
-
-      {movie ? <h2>{movie["title"]}</h2> : ""}
     </div>
   );
 }
