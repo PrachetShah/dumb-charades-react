@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "./GameForm.css";
+import axios from "axios";
 
 function GameForm() {
   let defaultVal = { English: false, Hindi: false };
 
   const [year, setYear] = useState(0);
+  const [movie, setMovie] = useState(null);
 
   const handleYear = (e) => {
     setYear(e.target.value);
@@ -23,7 +25,35 @@ function GameForm() {
     defaultVal[lang] = !defaultVal[lang];
   };
 
+  const callApi = (url) => {
+    let num, movieNum;
+    var headers = {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTc2ZmQxODc2OTcwYTk1YjE0NWUxOGY4M2U4ZjIyMyIsInN1YiI6IjYxMjcwOWNhMTk0MTg2MDA4YzY4NTc0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PNA5PI8Xo_yfemAzq_uK4GPSAWe7m4vBIukZsmRoVbo",
+    };
+    axios
+      .get(url, { headers })
+      .then((res) => {
+        // console.log(res);
+        // console.log(res.data);
+        num = res.data["results"].length;
+        movieNum = 1 + Math.floor(Math.random() * num);
+        console.log("Movie Num: ", movieNum);
+
+        let result = res.data["results"][movieNum];
+        console.log(result);
+        return result;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+    return null;
+  };
+
   const handleSubmit = (e) => {
+    e.preventDefault();
     let mapping = { English: "en-US", Hindi: "hi-IN" };
     console.log("Handle Submit Called");
 
@@ -36,10 +66,40 @@ function GameForm() {
       language = "en-US";
     }
 
+    let page = 1 + Math.floor(Math.random() * 15);
+    if (page == 5) {
+      page = 4;
+    }
+    console.log(page);
     console.log(language);
-    let url =
-      "https://api.themoviedb.org/3/discover/movie?include_video=false&language=en-US%2Chi-IN&page=1&sort_by=popularity.desc&with_origin_country=US%2CIN";
+
+    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc`;
+
+    let num, movieNum;
+    var headers = {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTc2ZmQxODc2OTcwYTk1YjE0NWUxOGY4M2U4ZjIyMyIsInN1YiI6IjYxMjcwOWNhMTk0MTg2MDA4YzY4NTc0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PNA5PI8Xo_yfemAzq_uK4GPSAWe7m4vBIukZsmRoVbo",
+    };
+    axios
+      .get(url, { headers })
+      .then((res) => {
+        // console.log(res);
+        console.log(res.data);
+        num = res.data["results"].length;
+        movieNum = 1 + Math.floor(Math.random() * num - 1);
+        console.log("Movie Num: ", movieNum);
+
+        let result = res.data["results"][movieNum];
+        console.log(result);
+        setMovie(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
+  useEffect(() => {}, [movie]);
 
   const type = "checkbox";
 
@@ -76,6 +136,8 @@ function GameForm() {
           </Button>
         </Row>
       </Form>
+
+      {movie ? <h2>{movie["title"]}</h2> : ""}
     </div>
   );
 }
