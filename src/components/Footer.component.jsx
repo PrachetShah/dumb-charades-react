@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FaFacebook,
-  FaGithub,
-  FaGlobe,
-  FaLinkedin,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -15,16 +9,44 @@ function Footer() {
           <div class="container pt-2">
             <section class="mt-4">
               <span className="fs-3 px-2">
-                <FaGithub />
+                <a
+                  href="https://github.com/PrachetShah"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white"
+                >
+                  <FaGithub />
+                </a>
               </span>
               <span className="fs-3 px-2">
-                <FaLinkedin />
+                <a
+                  href="https://www.linkedin.com/in/prachet-shah/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white"
+                >
+                  <FaLinkedin />
+                </a>
               </span>
               <span className="fs-3 px-2">
-                <FaTwitter />
+                <a
+                  href="https://twitter.com/prachet_shah"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white"
+                >
+                  <FaTwitter />
+                </a>
               </span>
               <span className="fs-3 px-2">
-                <FaGlobe />
+                <a
+                  href="https://prachetshah.netlify.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white"
+                >
+                  <FaGlobe />
+                </a>
               </span>
             </section>
           </div>
