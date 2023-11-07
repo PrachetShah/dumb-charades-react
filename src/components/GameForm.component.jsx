@@ -125,7 +125,7 @@ function GameForm() {
             Generate a Movie
           </Button>
         </Row>
-        <Row className="mt-3 pt-2 bg-body-tertiary">
+        <Row className="mt-3 pt-2 bg-body-tertiary text-center">
           <Col>{movie ? <h2>{movie["title"]}</h2> : ""}</Col>
         </Row>
       </Form>
