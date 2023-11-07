@@ -87,7 +87,7 @@ function GameForm() {
 
   return (
     <div className="d-flex align-items-center justify-content-center mx-2">
-      <Form className="p-5">
+      <Form className="p-3 pt-5">
         <Row className="bg-body-tertiary p-4">
           <Col>
             <h5 className="pe-2">Enter Year:</h5>
