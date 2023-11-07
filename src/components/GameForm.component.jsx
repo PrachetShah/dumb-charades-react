@@ -37,6 +37,9 @@ function GameForm() {
 
     let language = "English",
       origin = "US";
+    let page = 1 + Math.floor(Math.random() * 15);
+
+    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=${origin}`;
 
     if (radio === "English") {
       language = mapping[radio];
@@ -44,18 +47,20 @@ function GameForm() {
     } else {
       language = mapping[radio];
       origin = "IN";
+      url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=${origin}&with_original_language=hi`;
     }
 
-    let page = 1 + Math.floor(Math.random() * 15);
     // console.log(page);
     // console.log(language);
 
-    let url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=${origin}`;
+    // url = `https://api.themoviedb.org/3/discover/movie?include_video=false&language=${language}&page=${page}&sort_by=popularity.desc&with_origin_country=${origin}`;
 
     if (year > 1890) {
       console.log(year);
       url = url + `&year=${year}`;
     }
+
+    console.log(url);
 
     let num, movieNum;
     var headers = {
