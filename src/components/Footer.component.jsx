@@ -4,7 +4,7 @@ import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from "react-icons/fa";
 function Footer() {
   return (
     <>
-      <div class="position-fixed bottom-0 mt-2" style={{ width: "100%" }}>
+      <div class="mt-2" style={{ width: "100%" }}>
         <footer class=" text-center text-white">
           <div class="container pt-2">
             <section class="mt-4">

@@ -1,22 +1,16 @@
 import React from "react";
-import { Container, Navbar } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import img from "../img/logo.png";
 
 function NavbarComponent() {
   return (
     <Navbar className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home" className="fs-1">
-          <img
-            alt=""
-            src={img}
-            width="60"
-            height="60"
-            className="d-inline-block align-top"
-          />{" "}
-          Dumb Charades Movie Generator
+      <div className="d-flex px-3" style={{ width: "100%" }}>
+        <Navbar.Brand className="fs-3">
+          <img alt="" src={img} width="50" height="50" className=" align-top" />{" "}
         </Navbar.Brand>
-      </Container>
+        <h2 className="pt-2">Dumb Charades Movie Generator</h2>
+      </div>
     </Navbar>
   );
 }
