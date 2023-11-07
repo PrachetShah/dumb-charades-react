@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "./GameForm.css";
 import axios from "axios";
@@ -17,7 +17,7 @@ function GameForm() {
 
   const handleClick = (e) => {
     console.log("Handle Change Called");
-    let power = e.target.value;
+    // let power = e.target.value;
     let lang = e.target.id;
     // console.log(power, lang);
     if (lang === "Hindi") {
